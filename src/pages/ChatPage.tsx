@@ -7,6 +7,8 @@ interface Message {
   text: string;
 }
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -36,7 +38,7 @@ export default function ChatPage() {
     setIsTyping(true);
     
     try {
-      const response = await axios.post("http://localhost:3000/chat", { 
+      const response = await axios.post(`${BASE_URL}/chat`, { 
         message: userMessage.text 
       });
       
